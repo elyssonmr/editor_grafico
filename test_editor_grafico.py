@@ -79,6 +79,35 @@ class ExecucaoComandoAlteraMatriz(unittest.TestCase):
 
         self.assertEqual(esperado, self.editor.matriz)
 
+    def test_cmd_segmento_vertical(self):
+        self.editor.segmento_vertical('1', '2', '3', 'C')
+        esperado = [
+            ['O', 'C', 'C'],
+            ['O', 'O', 'O'],
+            ['O', 'O', 'O']
+        ]
+
+        self.assertEqual(esperado, self.editor.matriz)
+
+    def test_cmd_segmento_horizontal(self):
+        self.editor.segmento_horizontal('1', '3', '1', 'C')
+        esperado = [
+            ['C', 'O', 'O'],
+            ['C', 'O', 'O'],
+            ['C', 'O', 'O']
+        ]
+
+        self.assertEqual(esperado, self.editor.matriz)
+
+    def test_cmd_retangulo(self):
+        self.editor.desenhar_retangulo('1', '1', '3', '2', 'C')
+        esperado = [
+            ['C', 'C', 'O'],
+            ['C', 'C', 'O'],
+            ['C', 'C', 'O']
+        ]
+
+        self.assertEqual(esperado, self.editor.matriz)
 
 if __name__ == "__main__":
     unittest.main()

@@ -32,3 +32,29 @@ class EditorGrafico:
         x = int(x) - 1
         y = int(y) - 1
         self.matriz[x][y] = cor
+
+    def segmento_vertical(self, x, y1, y2, cor):
+        x = int(x) - 1
+        y1 = int(y1) - 1
+        y2 = int(y2)
+        for y in range(y1, y2):
+            self.matriz[x][y] = cor
+
+    def segmento_horizontal(self, x1, x2, y, cor):
+        x1 = int(x1) - 1
+        x2 = int(x2)
+        y = int(y) - 1
+
+        for x in range(x1, x2):
+            self.matriz[x][y] = cor
+
+    def desenhar_retangulo(self, x1, y1, x2, y2, cor):
+        x1 = int(x1) - 1
+        y1 = int(y1) - 1
+
+        x2 = int(x2)
+        y2 = int(y2)
+
+        for x in range(x1, x2):
+            for y in range(y1, y2):
+                self.matriz[x][y] = cor
