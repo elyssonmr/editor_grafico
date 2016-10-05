@@ -25,6 +25,16 @@ class PasearComandoTestCase(unittest.TestCase):
 
         self.assertEqual(esperado, resp)
 
+    def test_parse_comando_desenhar_seg_vertical(self):
+        comando_desenhar_segmento = "V 10 1 2 C"
+        esperado = {
+            'comando': 'desenhar_seg_vertical',
+            'args': ['10', '1', '2', 'C']
+        }
+        resp = parsear_comando(comando_desenhar_segmento)
+
+        self.assertEqual(esperado, resp)
+
 
 if __name__ == "__main__":
     unittest.main()

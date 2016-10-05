@@ -1,4 +1,9 @@
-comandos = {'C': 'limpar', 'I': 'criar', 'L': 'colorir'}
+comandos = {
+    'C': 'limpar',
+    'I': 'criar',
+    'L': 'colorir',
+    'V': 'desenhar_seg_vertical'
+}
 
 
 def parsear_comando(comando):
