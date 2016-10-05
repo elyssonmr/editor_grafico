@@ -1,27 +1,30 @@
 import unittest
 
-from editor_grafico import parsear_comando, criar_matriz, matriz
+from editor_grafico import criar_matriz, matriz, EditorGrafico
 
 
 class PasearComandoTestCase(unittest.TestCase):
+    def setUp(self):
+        self.editor = EditorGrafico()
+
     def test_parse_cmd_criar_matriz(self):
         cmd_criar = "I 10 10"
         esperado = {'comando': 'criar', 'args': ['10', '10']}
-        resp = parsear_comando(cmd_criar)
+        resp = self.editor.parsear_comando(cmd_criar)
 
         self.assertEqual(esperado, resp)
 
     def test_parse_cmd_limpar_matriz(self):
         cmd_limpar = "C"
         esperado = {'comando': 'limpar', 'args': []}
-        resp = parsear_comando(cmd_limpar)
+        resp = self.editor.parsear_comando(cmd_limpar)
 
         self.assertEqual(esperado, resp)
 
     def test_parse_cmd_colorir_pixel(self):
         cmd_colorir = "L 10 1 C"
         esperado = {'comando': "colorir", 'args': ['10', '1', 'C']}
-        resp = parsear_comando(cmd_colorir)
+        resp = self.editor.parsear_comando(cmd_colorir)
 
         self.assertEqual(esperado, resp)
 
@@ -31,14 +34,14 @@ class PasearComandoTestCase(unittest.TestCase):
             'comando': 'desenhar_seg_vertical',
             'args': ['10', '1', '2', 'C']
         }
-        resp = parsear_comando(cmd_desenhar_segmento)
+        resp = self.editor.parsear_comando(cmd_desenhar_segmento)
 
         self.assertEqual(esperado, resp)
 
     def test_parse_cmd_diferente(self):
         cmd_diferente = "T"
         esperado = {'comando': '', 'args': []}
-        resp = parsear_comando(cmd_diferente)
+        resp = self.editor.parsear_comando(cmd_diferente)
 
         self.assertEqual(esperado, resp)
 
