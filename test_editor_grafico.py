@@ -35,6 +35,13 @@ class PasearComandoTestCase(unittest.TestCase):
 
         self.assertEqual(esperado, resp)
 
+    def test_parse_cmd_diferente(self):
+        cmd_diferente = "T"
+        esperado = {'comando': '', 'args': []}
+        resp = parsear_comando(cmd_diferente)
+
+        self.assertEqual(esperado, resp)
+
 
 if __name__ == "__main__":
     unittest.main()
