@@ -5,16 +5,6 @@ comandos = {
     'V': 'desenhar_seg_vertical'
 }
 
-matriz = []
-
-
-def criar_matriz(linhas, colunas):
-    linhas = int(linhas)
-    colunas = int(colunas)
-    for l in range(linhas):
-        linha = ['O' for c in range(colunas)]
-        matriz.append(linha)
-
 
 class EditorGrafico:
     def __init__(self):
@@ -35,3 +25,10 @@ class EditorGrafico:
         comando_parseado['comando'] = comandos[partes[0]]
         comando_parseado['args'] = partes[1:]
         return comando_parseado
+
+    def criar_matriz(self, linhas, colunas):
+        linhas = int(linhas)
+        colunas = int(colunas)
+        for l in range(linhas):
+            linha = ['O' for c in range(colunas)]
+            self.matriz.append(linha)

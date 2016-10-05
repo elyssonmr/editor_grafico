@@ -1,6 +1,6 @@
 import unittest
 
-from editor_grafico import criar_matriz, matriz, EditorGrafico
+from editor_grafico import EditorGrafico
 
 
 class PasearComandoTestCase(unittest.TestCase):
@@ -47,12 +47,15 @@ class PasearComandoTestCase(unittest.TestCase):
 
 
 class ExecucaoComandoTestCase(unittest.TestCase):
+    def setUp(self):
+        self.editor = EditorGrafico()
+
     def test_cmd_criar_matriz(self):
-        criar_matriz('2', '2')
+        self.editor.criar_matriz('2', '2')
 
         esperado = [['O', 'O'], ['O', 'O']]
 
-        self.assertEqual(esperado, matriz)
+        self.assertEqual(esperado, self.editor.matriz)
 
 
 if __name__ == "__main__":
