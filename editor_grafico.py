@@ -25,3 +25,10 @@ def criar_matriz(linhas, colunas):
     for l in range(linhas):
         linha = ['O' for c in range(colunas)]
         matriz.append(linha)
+
+
+def colorir_pixel(x, y, cor):
+    x = int(x) - 1
+    y = int(y) - 1
+
+    matriz[x][y] = cor

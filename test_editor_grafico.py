@@ -1,6 +1,6 @@
 import unittest
 
-from editor_grafico import parsear_comando, criar_matriz, matriz
+from editor_grafico import parsear_comando, criar_matriz, matriz, colorir_pixel
 
 
 class PasearComandoTestCase(unittest.TestCase):
@@ -48,6 +48,13 @@ class ExecucaoComandoTestCase(unittest.TestCase):
         criar_matriz('2', '2')
 
         esperado = [['O', 'O'], ['O', 'O']]
+
+        self.assertEqual(esperado, matriz)
+
+    def test_cmd_colorir_pixel_coord(self):
+        colorir_pixel('1', '2', 'C')
+
+        esperado = [['O', 'C'], ['O', 'O']]
 
         self.assertEqual(esperado, matriz)
 
