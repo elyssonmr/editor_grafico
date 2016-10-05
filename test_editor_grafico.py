@@ -1,6 +1,6 @@
 import unittest
 
-from editor_grafico import parsear_comando
+from editor_grafico import parsear_comando, criar_matriz, matriz
 
 
 class PasearComandoTestCase(unittest.TestCase):
@@ -41,6 +41,15 @@ class PasearComandoTestCase(unittest.TestCase):
         resp = parsear_comando(cmd_diferente)
 
         self.assertEqual(esperado, resp)
+
+
+class ExecucaoComandoTestCase(unittest.TestCase):
+    def test_cmd_criar_matriz(self):
+        criar_matriz('2', '2')
+
+        esperado = [['O', 'O'], ['O', 'O']]
+
+        self.assertEqual(esperado, matriz)
 
 
 if __name__ == "__main__":

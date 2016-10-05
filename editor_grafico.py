@@ -5,6 +5,8 @@ comandos = {
     'V': 'desenhar_seg_vertical'
 }
 
+matriz = []
+
 
 def parsear_comando(comando):
     partes = comando.split()
@@ -15,3 +17,11 @@ def parsear_comando(comando):
     comando_parseado['comando'] = comandos[partes[0]]
     comando_parseado['args'] = partes[1:]
     return comando_parseado
+
+
+def criar_matriz(linhas, colunas):
+    linhas = int(linhas)
+    colunas = int(colunas)
+    for l in range(linhas):
+        linha = ['O' for c in range(colunas)]
+        matriz.append(linha)
