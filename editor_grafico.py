@@ -24,3 +24,6 @@ class EditorGrafico:
         for l in range(linhas):
             linha = ['O' for c in range(colunas)]
             self.matriz.append(linha)
+
+    def limpar_matriz(self):
+        self.matriz = []
