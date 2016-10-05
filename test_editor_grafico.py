@@ -11,6 +11,13 @@ class PasearComandoTestCase(unittest.TestCase):
 
         self.assertEqual(esperado, resp)
 
+    def test_parse_comando_limpa_matriz(self):
+        comando_limpar = "C"
+        esperado = {'comando': 'limpar', 'args': []}
+        resp = parsear_comando(comando_limpar)
+
+        self.assertEqual(esperado, resp)
+
 
 if __name__ == "__main__":
     unittest.main()
