@@ -1,11 +1,3 @@
-comandos = {
-    'C': 'limpar',
-    'I': 'criar',
-    'L': 'colorir',
-    'V': 'desenhar_seg_vertical'
-}
-
-
 class EditorGrafico:
     def __init__(self):
         self.matriz = []
@@ -18,11 +10,11 @@ class EditorGrafico:
 
     def parsear_comando(self, comando):
         partes = comando.split()
-        if partes[0] not in comandos.keys():
+        if partes[0] not in self.comandos.keys():
             return {'comando': '', 'args': []}
 
         comando_parseado = {}
-        comando_parseado['comando'] = comandos[partes[0]]
+        comando_parseado['comando'] = self.comandos[partes[0]]
         comando_parseado['args'] = partes[1:]
         return comando_parseado
 
