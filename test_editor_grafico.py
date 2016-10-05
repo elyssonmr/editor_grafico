@@ -64,5 +64,21 @@ class ExecucaoComandoCriarMatrizTestCase(unittest.TestCase):
         self.assertEqual(esperado, self.editor.matriz)
 
 
+class ExecucaoComandoAlteraMatriz(unittest.TestCase):
+    def setUp(self):
+        self.editor = EditorGrafico()
+        self.editor.criar_matriz('3', '3')
+
+    def test_cmd_colorir_pixel(self):
+        self.editor.colorir_pixel('1', '2', 'C')
+        esperado = [
+            ['O', 'C', 'O'],
+            ['O', 'O', 'O'],
+            ['O', 'O', 'O']
+        ]
+
+        self.assertEqual(esperado, self.editor.matriz)
+
+
 if __name__ == "__main__":
     unittest.main()

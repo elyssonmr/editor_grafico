@@ -27,3 +27,8 @@ class EditorGrafico:
 
     def limpar_matriz(self):
         self.matriz = []
+
+    def colorir_pixel(self, x, y, cor):
+        x = int(x) - 1
+        y = int(y) - 1
+        self.matriz[x][y] = cor
