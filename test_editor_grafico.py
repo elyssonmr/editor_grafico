@@ -178,6 +178,15 @@ class MainLoopTestCase(unittest.TestCase):
 
         self.assertEqual(esperado, resp)
 
+    @patch('test_editor_grafico.EditorGrafico.ler_input')
+    def test_ler_comando_invalido(self, _ler_input):
+        _ler_input.return_value = 'Q A B'
+        esperado = {'comando': '', 'args': []}
+
+        resp = self.editor.ler_comando()
+
+        self.assertEqual(esperado, resp)
+
     @patch('test_editor_grafico.EditorGrafico.ler_comando')
     def test_main_loop_with_command_create(self, _ler_comando):
         _ler_comando.return_value = {'comando': 'ler_matriz', 'args': []}
