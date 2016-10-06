@@ -5,7 +5,12 @@ class EditorGrafico:
             'C': 'limpar',
             'I': 'criar',
             'L': 'colorir',
-            'V': 'desenhar_seg_vertical'
+            'V': 'desenhar_seg_vertical',
+            'H': 'desenhar_seg_horizontal',
+            'K': 'desenhar_retangulo',
+            'F': 'preencher_regiao',
+            'S': 'salvar',
+            'X': 'sair'
         }
 
         self.sair = False

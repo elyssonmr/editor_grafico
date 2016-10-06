@@ -9,43 +9,42 @@ class PasearComandoTestCase(unittest.TestCase):
     def setUp(self):
         self.editor = EditorGrafico()
 
-    def test_parse_cmd_criar_matriz(self):
-        cmd_criar = "I 10 10"
-        esperado = {'comando': 'criar', 'args': ['10', '10']}
-        resp = self.editor.parsear_comando(cmd_criar)
+    def test_parse_cmds(self):
+        comandos = [
+            'I 10 10',
+            'C',
+            'L 1 1 C',
+            'V 1 1 3 C',
+            'H 2 4 1 C',
+            'K 1 2 3 5 C',
+            'F 2 4 C',
+            'S arq.bmp',
+            'X'
+        ]
+        esperados = [
+            {'comando': 'criar',
+             'args': ['10', '10']},
+            {'comando': 'limpar',
+             'args': []},
+            {'comando': 'colorir',
+             'args': ['1', '1', 'C']},
+            {'comando': 'desenhar_seg_vertical',
+             'args': ['1', '1', '3', 'C']},
+            {'comando': 'desenhar_seg_horizontal',
+             'args': ['2', '4', '1', 'C']},
+            {'comando': 'desenhar_retangulo',
+             'args': ['1', '2', '3', '5', 'C']},
+            {'comando': 'preencher_regiao',
+             'args': ['2', '4', 'C']},
+            {'comando': 'salvar',
+             'args': ['arq.bmp']},
+            {'comando': 'sair',
+             'args': []},
+        ]
 
-        self.assertEqual(esperado, resp)
-
-    def test_parse_cmd_limpar_matriz(self):
-        cmd_limpar = "C"
-        esperado = {'comando': 'limpar', 'args': []}
-        resp = self.editor.parsear_comando(cmd_limpar)
-
-        self.assertEqual(esperado, resp)
-
-    def test_parse_cmd_colorir_pixel(self):
-        cmd_colorir = "L 10 1 C"
-        esperado = {'comando': "colorir", 'args': ['10', '1', 'C']}
-        resp = self.editor.parsear_comando(cmd_colorir)
-
-        self.assertEqual(esperado, resp)
-
-    def test_parse_cmd_desenhar_seg_vertical(self):
-        cmd_desenhar_segmento = "V 10 1 2 C"
-        esperado = {
-            'comando': 'desenhar_seg_vertical',
-            'args': ['10', '1', '2', 'C']
-        }
-        resp = self.editor.parsear_comando(cmd_desenhar_segmento)
-
-        self.assertEqual(esperado, resp)
-
-    def test_parse_cmd_diferente(self):
-        cmd_diferente = "T"
-        esperado = {'comando': '', 'args': []}
-        resp = self.editor.parsear_comando(cmd_diferente)
-
-        self.assertEqual(esperado, resp)
+        for comando, esperado in zip(comandos, esperados):
+            resp = self.editor.parsear_comando(comando)
+            self.assertEqual(esperado, resp)
 
 
 class ExecucaoComandoCriarMatrizTestCase(unittest.TestCase):
