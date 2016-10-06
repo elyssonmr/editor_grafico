@@ -1,4 +1,5 @@
 import unittest
+import os
 
 from editor_grafico import EditorGrafico
 
@@ -135,6 +136,27 @@ class PreencherRegiaoTestCase(unittest.TestCase):
         self.editor.preencher_regiao(0, 0, 'C')
 
         self.assertEqual(esperado, self.editor.matriz)
+
+
+class SalvarArquivoTestCase(unittest.TestCase):
+    def setUp(self):
+        self.editor = EditorGrafico()
+        self.editor.criar_matriz('3', '3')
+        self.nome_arquivo = 'teste.bmp'
+
+    def test_cmd_salvar_matriz(self):
+        self.editor.salvar_matriz(self.nome_arquivo)
+
+        esperado = 'OOO\nOOO\nOOO'
+        arquivo = open(self.nome_arquivo, 'r')
+        conteudo = arquivo.read()
+        arquivo.close()
+
+        self.assertEqual(esperado, conteudo)
+
+    def tearDown(self):
+        if os.path.exists(self.nome_arquivo):
+            os.remove(self.nome_arquivo)
 
 
 if __name__ == "__main__":

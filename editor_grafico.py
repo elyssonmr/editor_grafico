@@ -88,3 +88,15 @@ class EditorGrafico:
             px, py = proximos.pop()
             proximos.update(self.buscar_proximos(px, py, cor_item))
             self.matriz[px][py] = cor
+
+    def salvar_matriz(self, nome_arquivo):
+        arquivo = open(nome_arquivo, 'w')
+        linhas = []
+        for x in range(0, self.linhas):
+            linha = ''
+            for y in range(0, self.colunas):
+                linha += self.matriz[x][y]
+            linhas.append(linha)
+        arquivo.write('\n'.join(linhas))
+        arquivo.flush()
+        arquivo.close()
