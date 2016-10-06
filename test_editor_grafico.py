@@ -112,7 +112,8 @@ class ExecucaoComandoAlteraMatriz(unittest.TestCase):
         self.assertEqual(esperado, self.editor.matriz)
 
     def test_encerrar_programa(self):
-        self.assertRaises(SystemExit, self.editor.encerrar_app)
+        self.editor.encerrar_app()
+        self.assertTrue(self.editor.sair)
 
 
 class PreencherRegiaoTestCase(unittest.TestCase):
@@ -189,10 +190,36 @@ class MainLoopTestCase(unittest.TestCase):
 
     @patch('test_editor_grafico.EditorGrafico.ler_comando')
     def test_main_loop_with_command_create(self, _ler_comando):
-        _ler_comando.return_value = {'comando': 'ler_matriz', 'args': []}
+        _ler_comando.side_effect = [
+            {'comando': 'criar', 'args': ['3', '3']},
+            {'comando': 'sair', 'args': []}
+        ]
+        esperado = [
+            ['O', 'O', 'O'],
+            ['O', 'O', 'O'],
+            ['O', 'O', 'O']
+        ]
         self.editor.main_loop()
 
-        _ler_comando.assert_called_once_with()
+        self.assertEqual(esperado, self.editor.matriz)
+
+    @patch('test_editor_grafico.EditorGrafico.ler_comando')
+    def test_main_loop_criar_colorir(self, _ler_input):
+        _ler_input.side_effect = [
+            {'comando': 'criar', 'args': ['3', '3']},
+            {'comando': 'colorir', 'args': ['1', '1', 'C']},
+            {'comando': 'sair', 'args': []}
+        ]
+
+        esperado = [
+            ['C', 'O', 'O'],
+            ['O', 'O', 'O'],
+            ['O', 'O', 'O']
+        ]
+
+        self.editor.main_loop()
+
+        self.assertEqual(esperado, self.editor.matriz)
 
 
 if __name__ == "__main__":

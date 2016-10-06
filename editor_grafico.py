@@ -1,6 +1,3 @@
-import sys
-
-
 class EditorGrafico:
     def __init__(self):
         self.matriz = []
@@ -10,6 +7,8 @@ class EditorGrafico:
             'L': 'colorir',
             'V': 'desenhar_seg_vertical'
         }
+
+        self.sair = False
 
     def parsear_comando(self, comando):
         partes = comando.split()
@@ -105,7 +104,7 @@ class EditorGrafico:
         arquivo.close()
 
     def encerrar_app(self):
-        sys.exit()
+        self.sair = True
 
     def ler_input(self):
         return input('')
@@ -115,4 +114,14 @@ class EditorGrafico:
         return self.parsear_comando(entrada)
 
     def main_loop(self):
-        self.ler_comando()
+        while not self.sair:
+            comando = self.ler_comando()
+
+            if comando['comando'] == 'criar':
+                self.criar_matriz(*comando['args'])
+
+            if comando['comando'] == 'colorir':
+                self.colorir_pixel(*comando['args'])
+
+            if comando['comando'] == 'sair':
+                self.encerrar_app()
