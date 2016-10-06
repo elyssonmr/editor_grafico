@@ -63,7 +63,7 @@ class EditorGrafico:
         if x < 0 or y < 0:
             return True
 
-        if x > self.linhas or y > self.colunas:
+        if x >= self.linhas or y >= self.colunas:
             return True
 
         return False
@@ -71,9 +71,20 @@ class EditorGrafico:
     def buscar_proximos(self, x, y, cor):
         proximos = set()
         for xdes in range(x - 1, x + 2):
-            for ydes in range(x - 1, x + 2):
+            for ydes in range(y - 1, y + 2):
                 if not self.fora_matriz(xdes, ydes):
                     if (xdes != x or ydes != y):
                         if self.matriz[xdes][ydes] == cor:
                             proximos.add((xdes, ydes))
         return proximos
+
+    def preencher_regiao(self, x, y, cor):
+        cor_item = self.matriz[x][y]
+
+        proximos = set()
+        proximos.add((x, y))
+
+        while len(proximos) > 0:
+            px, py = proximos.pop()
+            proximos.update(self.buscar_proximos(px, py, cor_item))
+            self.matriz[px][py] = cor

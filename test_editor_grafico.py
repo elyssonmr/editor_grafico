@@ -126,6 +126,16 @@ class PreencherRegiaoTestCase(unittest.TestCase):
 
         self.assertEqual(esperado, resp)
 
+    def test_preencher_regiao(self):
+        esperado = [
+            ['C', 'C', 'O'],
+            ['O', 'C', 'C'],
+            ['O', 'O', 'O']
+        ]
+        self.editor.preencher_regiao(0, 0, 'C')
+
+        self.assertEqual(esperado, self.editor.matriz)
+
 
 if __name__ == "__main__":
     unittest.main()
