@@ -19,10 +19,10 @@ class EditorGrafico:
         return comando_parseado
 
     def criar_matriz(self, linhas, colunas):
-        linhas = int(linhas)
-        colunas = int(colunas)
-        for l in range(linhas):
-            linha = ['O' for c in range(colunas)]
+        self.linhas = int(linhas)
+        self.colunas = int(colunas)
+        for l in range(self.linhas):
+            linha = ['O' for c in range(self.colunas)]
             self.matriz.append(linha)
 
     def limpar_matriz(self):
@@ -58,3 +58,22 @@ class EditorGrafico:
         for x in range(x1, x2):
             for y in range(y1, y2):
                 self.matriz[x][y] = cor
+
+    def fora_matriz(self, x, y):
+        if x < 0 or y < 0:
+            return True
+
+        if x > self.linhas or y > self.colunas:
+            return True
+
+        return False
+
+    def buscar_proximos(self, x, y, cor):
+        proximos = set()
+        for xdes in range(x - 1, x + 2):
+            for ydes in range(x - 1, x + 2):
+                if not self.fora_matriz(xdes, ydes):
+                    if (xdes != x or ydes != y):
+                        if self.matriz[xdes][ydes] == cor:
+                            proximos.add((xdes, ydes))
+        return proximos

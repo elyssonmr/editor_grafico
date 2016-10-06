@@ -109,5 +109,23 @@ class ExecucaoComandoAlteraMatriz(unittest.TestCase):
 
         self.assertEqual(esperado, self.editor.matriz)
 
+
+class PreencherRegiaoTestCase(unittest.TestCase):
+    def setUp(self):
+        self.editor = EditorGrafico()
+        self.editor.criar_matriz('3', '3')
+        self.editor.matriz = [
+            ['B', 'B', 'O'],
+            ['O', 'B', 'B'],
+            ['O', 'O', 'O']
+        ]
+
+    def test_buscar_proximos(self):
+        esperado = set([(0, 1), (1, 1)])
+        resp = self.editor.buscar_proximos(0, 0, 'B')
+
+        self.assertEqual(esperado, resp)
+
+
 if __name__ == "__main__":
     unittest.main()
