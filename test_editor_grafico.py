@@ -229,6 +229,24 @@ class MainLoopTestCase(unittest.TestCase):
 
         self.assertEqual(esperado, self.editor.matriz)
 
+    @patch('test_editor_grafico.EditorGrafico.ler_comando')
+    def test_main_loop_criar_invalido(self, _ler_input):
+        _ler_input.side_effect = [
+            {'comando': self.editor.criar_matriz, 'args': ['3', '3']},
+            {'comando': None, 'args': []},
+            {'comando': self.editor.encerrar_app, 'args': []}
+        ]
+
+        esperado = [
+            ['O', 'O', 'O'],
+            ['O', 'O', 'O'],
+            ['O', 'O', 'O']
+        ]
+
+        self.editor.main_loop()
+
+        self.assertEqual(esperado, self.editor.matriz)
+
 
 if __name__ == "__main__":
     unittest.main()
