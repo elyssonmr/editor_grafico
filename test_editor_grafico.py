@@ -110,6 +110,9 @@ class ExecucaoComandoAlteraMatriz(unittest.TestCase):
 
         self.assertEqual(esperado, self.editor.matriz)
 
+    def test_encerrar_programa(self):
+        self.assertRaises(SystemExit, self.editor.encerrar_app)
+
 
 class PreencherRegiaoTestCase(unittest.TestCase):
     def setUp(self):

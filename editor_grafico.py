@@ -1,3 +1,6 @@
+import sys
+
+
 class EditorGrafico:
     def __init__(self):
         self.matriz = []
@@ -100,3 +103,6 @@ class EditorGrafico:
         arquivo.write('\n'.join(linhas))
         arquivo.flush()
         arquivo.close()
+
+    def encerrar_app(self):
+        sys.exit()
