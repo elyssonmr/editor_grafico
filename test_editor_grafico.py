@@ -9,6 +9,14 @@ class PasearComandoTestCase(unittest.TestCase):
     def setUp(self):
         self.editor = EditorGrafico()
 
+    def test_parse_cmd_funcao(self):
+        comando = 'D'
+
+        esperado = {'comando': self.editor.dummy, 'args': []}
+        resp = self.editor.parsear_comando(comando)
+
+        self.assertEqual(esperado, resp)
+
     def test_parse_cmds(self):
         comandos = [
             'I 10 10',

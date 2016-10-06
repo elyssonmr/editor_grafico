@@ -10,10 +10,14 @@ class EditorGrafico:
             'K': 'desenhar_retangulo',
             'F': 'preencher_regiao',
             'S': 'salvar',
-            'X': 'sair'
+            'X': 'sair',
+            'D': self.dummy
         }
 
         self.sair = False
+
+    def dummy(self):
+        pass
 
     def parsear_comando(self, comando):
         partes = comando.split()
