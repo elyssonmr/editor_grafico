@@ -22,7 +22,7 @@ class EditorGrafico:
     def parsear_comando(self, comando):
         partes = comando.split()
         if partes[0] not in self.comandos.keys():
-            return {'comando': '', 'args': []}
+            return {'comando': None, 'args': []}
 
         comando_parseado = {}
         comando_parseado['comando'] = self.comandos[partes[0]]
@@ -126,11 +126,5 @@ class EditorGrafico:
         while not self.sair:
             comando = self.ler_comando()
 
-            if comando['comando'] == 'criar':
-                self.criar_matriz(*comando['args'])
-
-            if comando['comando'] == 'colorir':
-                self.colorir_pixel(*comando['args'])
-
-            if comando['comando'] == 'sair':
-                self.encerrar_app()
+            if comando['comando']:
+                comando['comando'](*comando['args'])

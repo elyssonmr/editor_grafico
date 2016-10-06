@@ -190,7 +190,7 @@ class MainLoopTestCase(unittest.TestCase):
     @patch('test_editor_grafico.EditorGrafico.ler_input')
     def test_ler_comando_invalido(self, _ler_input):
         _ler_input.return_value = 'Q A B'
-        esperado = {'comando': '', 'args': []}
+        esperado = {'comando': None, 'args': []}
 
         resp = self.editor.ler_comando()
 
@@ -199,8 +199,8 @@ class MainLoopTestCase(unittest.TestCase):
     @patch('test_editor_grafico.EditorGrafico.ler_comando')
     def test_main_loop_with_command_create(self, _ler_comando):
         _ler_comando.side_effect = [
-            {'comando': 'criar', 'args': ['3', '3']},
-            {'comando': 'sair', 'args': []}
+            {'comando': self.editor.criar_matriz, 'args': ['3', '3']},
+            {'comando': self.editor.encerrar_app, 'args': []}
         ]
         esperado = [
             ['O', 'O', 'O'],
@@ -214,9 +214,9 @@ class MainLoopTestCase(unittest.TestCase):
     @patch('test_editor_grafico.EditorGrafico.ler_comando')
     def test_main_loop_criar_colorir(self, _ler_input):
         _ler_input.side_effect = [
-            {'comando': 'criar', 'args': ['3', '3']},
-            {'comando': 'colorir', 'args': ['1', '1', 'C']},
-            {'comando': 'sair', 'args': []}
+            {'comando': self.editor.criar_matriz, 'args': ['3', '3']},
+            {'comando': self.editor.colorir_pixel, 'args': ['1', '1', 'C']},
+            {'comando': self.editor.encerrar_app, 'args': []}
         ]
 
         esperado = [
