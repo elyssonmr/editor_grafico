@@ -59,13 +59,14 @@ class ExecucaoComandoCriarMatrizTestCase(unittest.TestCase):
         self.assertEqual(esperado, self.editor.matriz)
 
     def test_cmd_limpar_matriz(self):
+        self.editor.matriz = [['O', 'O'], ['O', 'O']]
         self.editor.limpar_matriz()
         esperado = []
 
         self.assertEqual(esperado, self.editor.matriz)
 
 
-class ExecucaoComandoAlteraMatriz(unittest.TestCase):
+class ExecucaoComandosAlterarMatriz(unittest.TestCase):
     def setUp(self):
         self.editor = EditorGrafico()
         self.editor.criar_matriz('3', '3')
