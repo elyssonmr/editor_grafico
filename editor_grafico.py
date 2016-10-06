@@ -2,15 +2,15 @@ class EditorGrafico:
     def __init__(self):
         self.matriz = []
         self.comandos = {
-            'C': 'limpar',
-            'I': 'criar',
-            'L': 'colorir',
-            'V': 'desenhar_seg_vertical',
-            'H': 'desenhar_seg_horizontal',
-            'K': 'desenhar_retangulo',
-            'F': 'preencher_regiao',
-            'S': 'salvar',
-            'X': 'sair',
+            'C': self.limpar_matriz,
+            'I': self.criar_matriz,
+            'L': self.colorir_pixel,
+            'V': self.segmento_vertical,
+            'H': self.segmento_horizontal,
+            'K': self.desenhar_retangulo,
+            'F': self.preencher_regiao,
+            'S': self.salvar_matriz,
+            'X': self.encerrar_app,
             'D': self.dummy
         }
 

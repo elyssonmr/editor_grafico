@@ -30,23 +30,23 @@ class PasearComandoTestCase(unittest.TestCase):
             'X'
         ]
         esperados = [
-            {'comando': 'criar',
+            {'comando': self.editor.criar_matriz,
              'args': ['10', '10']},
-            {'comando': 'limpar',
+            {'comando': self.editor.limpar_matriz,
              'args': []},
-            {'comando': 'colorir',
+            {'comando': self.editor.colorir_pixel,
              'args': ['1', '1', 'C']},
-            {'comando': 'desenhar_seg_vertical',
+            {'comando': self.editor.segmento_vertical,
              'args': ['1', '1', '3', 'C']},
-            {'comando': 'desenhar_seg_horizontal',
+            {'comando': self.editor.segmento_horizontal,
              'args': ['2', '4', '1', 'C']},
-            {'comando': 'desenhar_retangulo',
+            {'comando': self.editor.desenhar_retangulo,
              'args': ['1', '2', '3', '5', 'C']},
-            {'comando': 'preencher_regiao',
+            {'comando': self.editor.preencher_regiao,
              'args': ['2', '4', 'C']},
-            {'comando': 'salvar',
+            {'comando': self.editor.salvar_matriz,
              'args': ['arq.bmp']},
-            {'comando': 'sair',
+            {'comando': self.editor.encerrar_app,
              'args': []},
         ]
 
@@ -179,7 +179,7 @@ class MainLoopTestCase(unittest.TestCase):
     @patch('test_editor_grafico.EditorGrafico.ler_input')
     def test_ler_comando_criar_matriz(self, _ler_input):
         _ler_input.return_value = 'I 3 3'
-        esperado = {'comando': 'criar', 'args': ['3', '3']}
+        esperado = {'comando': self.editor.criar_matriz, 'args': ['3', '3']}
 
         resp = self.editor.ler_comando()
 
