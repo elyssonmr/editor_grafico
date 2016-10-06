@@ -106,3 +106,13 @@ class EditorGrafico:
 
     def encerrar_app(self):
         sys.exit()
+
+    def ler_input(self):
+        return input('')
+
+    def ler_comando(self):
+        entrada = self.ler_input()
+        return self.parsear_comando(entrada)
+
+    def main_loop(self):
+        self.ler_comando()

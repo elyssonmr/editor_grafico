@@ -1,5 +1,6 @@
 import unittest
 import os
+from unittest.mock import patch
 
 from editor_grafico import EditorGrafico
 
@@ -160,6 +161,29 @@ class SalvarArquivoTestCase(unittest.TestCase):
     def tearDown(self):
         if os.path.exists(self.nome_arquivo):
             os.remove(self.nome_arquivo)
+
+
+class MainLoopTestCase(unittest.TestCase):
+    def setUp(self):
+        self.editor = EditorGrafico()
+
+    @patch('test_editor_grafico.EditorGrafico.ler_input')
+    def test_ler_comando_criar_matriz(self, _ler_input):
+        _ler_input.return_value = 'I 3 3'
+        esperado = {'comando': 'criar', 'args': ['3', '3']}
+
+        resp = self.editor.ler_comando()
+
+        _ler_input.assert_called_once_with()
+
+        self.assertEqual(esperado, resp)
+
+    @patch('test_editor_grafico.EditorGrafico.ler_comando')
+    def test_main_loop_with_command_create(self, _ler_comando):
+        _ler_comando.return_value = {'comando': 'ler_matriz', 'args': []}
+        self.editor.main_loop()
+
+        _ler_comando.assert_called_once_with()
 
 
 if __name__ == "__main__":
