@@ -128,3 +128,11 @@ class EditorGrafico:
 
             if comando['comando']:
                 comando['comando'](*comando['args'])
+
+
+def main():
+    editor = EditorGrafico()
+    editor.main_loop()
+
+if __name__ == '__main__':
+    main()
