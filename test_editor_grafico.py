@@ -1,5 +1,6 @@
 import unittest
 import os
+import subprocess
 from unittest.mock import patch
 
 from editor_grafico import EditorGrafico
@@ -246,6 +247,17 @@ class MainLoopTestCase(unittest.TestCase):
         self.editor.main_loop()
 
         self.assertEqual(esperado, self.editor.matriz)
+
+
+class SimulacaoTestCase(unittest.TestCase):
+    def test_subprocess(self):
+        p = subprocess.Popen(
+            ['python3', 'editor_grafico.py'],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE
+        )
+
+        p.communicate(input=b'I 3 3\nS teste.bmp\nX\n')[0]
 
 
 if __name__ == "__main__":

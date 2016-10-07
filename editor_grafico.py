@@ -116,7 +116,7 @@ class EditorGrafico:
         self.sair = True
 
     def ler_input(self):
-        return input('')
+        return input()
 
     def ler_comando(self):
         entrada = self.ler_input()
