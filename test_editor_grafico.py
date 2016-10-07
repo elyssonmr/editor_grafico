@@ -285,6 +285,11 @@ class SimulacaoProcessoTestCase(unittest.TestCase):
 
         self.assertEqual(esperado, output.decode('utf-8'))
 
+    def tearDown(self):
+        for f in os.listdir('.'):
+            if f.endswith('.bmp'):
+                os.remove(f)
+
 
 if __name__ == "__main__":
     unittest.main()
