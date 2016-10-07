@@ -111,7 +111,7 @@ class ExecucaoComandosAlterarMatriz(unittest.TestCase):
         self.assertEqual(esperado, self.editor.matriz)
 
     def test_cmd_retangulo(self):
-        self.editor.desenhar_retangulo('1', '1', '3', '2', 'C')
+        self.editor.desenhar_retangulo('1', '1', '2', '3', 'C')
         esperado = [
             ['C', 'C', 'O'],
             ['C', 'C', 'O'],
@@ -147,7 +147,7 @@ class PreencherRegiaoTestCase(unittest.TestCase):
             ['O', 'C', 'C'],
             ['O', 'O', 'O']
         ]
-        self.editor.preencher_regiao(0, 0, 'C')
+        self.editor.preencher_regiao('1', '1', 'C')
 
         self.assertEqual(esperado, self.editor.matriz)
 
@@ -249,7 +249,7 @@ class MainLoopTestCase(unittest.TestCase):
         self.assertEqual(esperado, self.editor.matriz)
 
 
-class SimulacaoTestCase(unittest.TestCase):
+class SimulacaoProcessoTestCase(unittest.TestCase):
     def test_01(self):
         p = subprocess.Popen(
             ['python3', 'editor_grafico.py'],
@@ -266,6 +266,25 @@ class SimulacaoTestCase(unittest.TestCase):
         output = p.communicate(input=input_comandos)[0]
 
         self.assertEqual(esperado, output.decode('utf-8'))
+
+    def test_02(self):
+        p = subprocess.Popen(
+            ['python3', 'editor_grafico.py'],
+            stdin=subprocess.PIPE,
+            stdout=subprocess.PIPE
+        )
+
+        input_comandos = b'I 10 9\nL 5 3 A\nG 2 3 J\nV 2 3 4 W\n' + \
+            b'H 1 10 5 Z\nF 3 3 J\nK 2 7 8 8 E\nF 9 9 R\nS one.bmp\nX\n'
+
+        esperado = 'one.bmp\nJJJJJJJJJJ\nJJJJJJJJJJ\nJWJJAJJJJJ\n' + \
+            'JWJJJJJJJJ\nZZZZZZZZZZ\nRRRRRRRRRR\nREEEEEEERR\nREEEEEEERR\n' + \
+            'RRRRRRRRRR\n'
+
+        output = p.communicate(input=input_comandos)[0]
+
+        self.assertEqual(esperado, output.decode('utf-8'))
+
 
 if __name__ == "__main__":
     unittest.main()

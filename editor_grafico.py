@@ -59,16 +59,16 @@ class EditorGrafico:
         for col in range(col1, col2):
             self.matriz[linha][col] = cor
 
-    def desenhar_retangulo(self, x1, y1, x2, y2, cor):
-        x1 = int(x1) - 1
-        y1 = int(y1) - 1
+    def desenhar_retangulo(self, col1, linha1, col2, linha2, cor):
+        col1 = int(col1) - 1
+        linha1 = int(linha1) - 1
 
-        x2 = int(x2)
-        y2 = int(y2)
+        col2 = int(col2)
+        linha2 = int(linha2)
 
-        for x in range(x1, x2):
-            for y in range(y1, y2):
-                self.matriz[x][y] = cor
+        for linha in range(linha1, linha2):
+            for col in range(col1, col2):
+                self.matriz[linha][col] = cor
 
     def fora_matriz(self, x, y):
         if x < 0 or y < 0:
@@ -89,13 +89,13 @@ class EditorGrafico:
                             proximos.add((xdes, ydes))
         return proximos
 
-    def preencher_regiao(self, x, y, cor):
-        x = int(x)
-        y = int(y)
-        cor_item = self.matriz[x][y]
+    def preencher_regiao(self, linha, coluna, cor):
+        linha = int(linha) - 1
+        coluna = int(coluna) - 1
+        cor_item = self.matriz[linha][coluna]
 
         proximos = set()
-        proximos.add((x, y))
+        proximos.add((linha, coluna))
 
         while len(proximos) > 0:
             px, py = proximos.pop()
