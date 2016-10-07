@@ -10,14 +10,10 @@ class EditorGrafico:
             'K': self.desenhar_retangulo,
             'F': self.preencher_regiao,
             'S': self.salvar_matriz,
-            'X': self.encerrar_app,
-            'D': self.dummy
+            'X': self.encerrar_app
         }
 
         self.sair = False
-
-    def dummy(self):
-        pass
 
     def parsear_comando(self, comando):
         partes = comando.split()
