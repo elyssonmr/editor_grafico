@@ -1,5 +1,7 @@
 import unittest
 import os
+import sys
+from io import StringIO
 import subprocess
 from unittest.mock import patch
 
@@ -157,6 +159,7 @@ class SalvarArquivoTestCase(unittest.TestCase):
         self.editor = EditorGrafico()
         self.editor.criar_matriz('3', '3')
         self.nome_arquivo = 'teste.bmp'
+        sys.stdout = StringIO()
 
     def test_cmd_salvar_matriz(self):
         self.editor.salvar_matriz(self.nome_arquivo)
