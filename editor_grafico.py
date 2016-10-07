@@ -29,7 +29,7 @@ class EditorGrafico:
         comando_parseado['args'] = partes[1:]
         return comando_parseado
 
-    def criar_matriz(self, linhas, colunas):
+    def criar_matriz(self, colunas, linhas):
         self.linhas = int(linhas)
         self.colunas = int(colunas)
         for l in range(self.linhas):
@@ -39,25 +39,25 @@ class EditorGrafico:
     def limpar_matriz(self):
         self.matriz = []
 
-    def colorir_pixel(self, x, y, cor):
-        x = int(x) - 1
-        y = int(y) - 1
-        self.matriz[x][y] = cor
+    def colorir_pixel(self, coluna, linha, cor):
+        linha = int(linha) - 1
+        coluna = int(coluna) - 1
+        self.matriz[linha][coluna] = cor
 
-    def segmento_vertical(self, x, y1, y2, cor):
-        x = int(x) - 1
-        y1 = int(y1) - 1
-        y2 = int(y2)
-        for y in range(y1, y2):
-            self.matriz[x][y] = cor
+    def segmento_vertical(self, col, linha1, linha2, cor):
+        col = int(col) - 1
+        linha1 = int(linha1) - 1
+        linha2 = int(linha2)
+        for linha in range(linha1, linha2):
+            self.matriz[linha][col] = cor
 
-    def segmento_horizontal(self, x1, x2, y, cor):
-        x1 = int(x1) - 1
-        x2 = int(x2)
-        y = int(y) - 1
+    def segmento_horizontal(self, col1, col2, linha, cor):
+        col1 = int(col1) - 1
+        col2 = int(col2)
+        linha = int(linha) - 1
 
-        for x in range(x1, x2):
-            self.matriz[x][y] = cor
+        for col in range(col1, col2):
+            self.matriz[linha][col] = cor
 
     def desenhar_retangulo(self, x1, y1, x2, y2, cor):
         x1 = int(x1) - 1
@@ -90,6 +90,8 @@ class EditorGrafico:
         return proximos
 
     def preencher_regiao(self, x, y, cor):
+        x = int(x)
+        y = int(y)
         cor_item = self.matriz[x][y]
 
         proximos = set()
@@ -101,6 +103,7 @@ class EditorGrafico:
             self.matriz[px][py] = cor
 
     def salvar_matriz(self, nome_arquivo):
+        print(nome_arquivo)
         arquivo = open(nome_arquivo, 'w')
         linhas = []
         for x in range(0, self.linhas):
@@ -111,6 +114,7 @@ class EditorGrafico:
         arquivo.write('\n'.join(linhas))
         arquivo.flush()
         arquivo.close()
+        print('\n'.join(linhas))
 
     def encerrar_app(self):
         self.sair = True

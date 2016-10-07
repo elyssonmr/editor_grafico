@@ -83,8 +83,8 @@ class ExecucaoComandosAlterarMatriz(unittest.TestCase):
     def test_cmd_colorir_pixel(self):
         self.editor.colorir_pixel('1', '2', 'C')
         esperado = [
-            ['O', 'C', 'O'],
             ['O', 'O', 'O'],
+            ['C', 'O', 'O'],
             ['O', 'O', 'O']
         ]
 
@@ -93,9 +93,9 @@ class ExecucaoComandosAlterarMatriz(unittest.TestCase):
     def test_cmd_segmento_vertical(self):
         self.editor.segmento_vertical('1', '2', '3', 'C')
         esperado = [
-            ['O', 'C', 'C'],
             ['O', 'O', 'O'],
-            ['O', 'O', 'O']
+            ['C', 'O', 'O'],
+            ['C', 'O', 'O']
         ]
 
         self.assertEqual(esperado, self.editor.matriz)
@@ -103,9 +103,9 @@ class ExecucaoComandosAlterarMatriz(unittest.TestCase):
     def test_cmd_segmento_horizontal(self):
         self.editor.segmento_horizontal('1', '3', '1', 'C')
         esperado = [
-            ['C', 'O', 'O'],
-            ['C', 'O', 'O'],
-            ['C', 'O', 'O']
+            ['C', 'C', 'C'],
+            ['O', 'O', 'O'],
+            ['O', 'O', 'O']
         ]
 
         self.assertEqual(esperado, self.editor.matriz)
@@ -250,15 +250,22 @@ class MainLoopTestCase(unittest.TestCase):
 
 
 class SimulacaoTestCase(unittest.TestCase):
-    def test_subprocess(self):
+    def test_01(self):
         p = subprocess.Popen(
             ['python3', 'editor_grafico.py'],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE
         )
 
-        p.communicate(input=b'I 3 3\nS teste.bmp\nX\n')[0]
+        input_comandos = b'I 5 6\nL 2 3 A\nS one.bmp\nG 2 3 J\nV 2 3 4 W\n' + \
+            b'H 3 4 2 Z\nF 3 3 J\nS two.bmp\nX\n'
 
+        esperado = 'one.bmp\nOOOOO\nOOOOO\nOAOOO\nOOOOO\nOOOOO\nOOOOO\n' + \
+            'two.bmp\nJJJJJ\nJJZZJ\nJWJJJ\nJWJJJ\nJJJJJ\nJJJJJ\n'
+
+        output = p.communicate(input=input_comandos)[0]
+
+        self.assertEqual(esperado, output.decode('utf-8'))
 
 if __name__ == "__main__":
     unittest.main()
